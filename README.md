@@ -1,72 +1,74 @@
 # Cognitive Load Prediction from EEG Features
-Project Overview
-This project aims to predict cognitive load (low vs high) using EEG-derived spectral features. Cognitive load is a fundamental concept in cognitive neuroscience, relevant to attention, working memory, language processing, and human–computer interaction.
-Using machine learning, we build a reproducible pipeline that:
-. Explores EEG band-power features
-. Trains and compares multiple classification models
-. Deploys the final model as a REST API using Docker
 
-Problem Statement
-Assessing cognitive load traditionally relies on behavioral measures or subjective reporting. EEG provides an objective physiological signal, but manual analysis is time-consuming.
+## Overview
+This project predicts cognitive load (low vs high) using EEG derived spectral features.
+Cognitive load is a key concept in cognitive neuroscience, relevant to attention, working memory,
+and language processing.
 
-Goal:
-Use supervised machine learning to classify low vs high cognitive load from EEG spectral features.
+The project was developed as a capstone for the Machine Learning Zoomcamp and focuses on
+reproducibility, interpretability, and deployment.
 
-Dataset
-Source: Public EEG dataset from Kaggle (datasets section)
+---
 
-Features:
-Frequency band power: delta, theta, alpha, beta, gamma
-Aggregated across channels
+## Problem Statement
+Cognitive load is traditionally assessed using behavioral measures or self-reports.
+EEG provides an objective physiological signal, but manual analysis is time consuming.
 
-Target:
-Cognitive load level (binary classification)
-The dataset is small enough for rapid experimentation while remaining representative of real EEG-based cognitive tasks.
+**Goal:**  
+Train a machine learning model to classify low vs high cognitive load from EEG band-power features.
 
-Exploratory Data Analysis
-. Distribution of EEG band power features
-. Correlation analysis between frequency bands
-. Class balance inspection
-. EDA results informed feature scaling and model selection.
+---
 
-Models Trained
-The following models were trained and evaluated:
-Model	Description
-. Logistic Regression	Baseline linear classifier
-. Random Forest	Non-linear ensemble model
-. Gradient Boosting	Tuned ensemble model
-. (Optional) MLP	Simple neural network
+## Dataset
+- Source: Public EEG dataset from Kaggle (datasets section)
+- Features: Delta, Theta, Alpha, Beta, Gamma band power
+- Target: Binary cognitive load label (derived from mental state indicators)
 
-Evaluation Metric
-Primary metric: ROC-AUC
-Secondary: Accuracy, F1-score
-ROC-AUC was selected due to potential class imbalance and interpretability.
+---
 
-Final Model
-The best-performing model was selected based on validation ROC-AUC and exported using joblib.
+## Exploratory Data Analysis
+EDA includes:
+- Feature distributions
+- Correlation analysis between EEG bands
+- Class balance inspection
 
-Deployment
-The trained model is deployed as a REST API using:
-FastAPI for inference
-Docker for containerization
-Example Request
-{
-  "delta": 0.45,
-  "theta": 0.62,
-  "alpha": 0.31,
-  "beta": 0.22,
-  "gamma": 0.18
-}
-Example Response
-{
-  "cognitive_load_probability": 0.81,
-  "prediction": "high"
-}
+---
 
-Future Work
-. Channel-level feature modeling
-. Time-resolved cognitive load prediction
-. Multimodal integration (speech or eye-tracking)
-. Deployment using Kubernetes or serverless inference
+## Models
+- Logistic Regression (baseline)
+- Random Forest
+- Gradient Boosting
+- (Optional) Neural Network (MLP)
+
+---
+
+## Evaluation
+- Primary metric: ROC-AUC
+- Secondary metrics: Accuracy, F1-score
+
+---
+
+## Deployment
+The final model is deployed as a REST API using FastAPI and Docker.
+
+---
+
+## Project Structure
+cognitive-load-eeg-ml/
+- data/
+- notebooks/
+- src/
+- models/
+- Dockerfile
+- README.md
+- requirements.txt
+
+---
+
+## Reproducibility
+- Fixed random seeds
+- Version-pinned dependencies
+- Training and inference are separated
+
 
 
