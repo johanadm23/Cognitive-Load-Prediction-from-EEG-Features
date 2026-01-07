@@ -1,11 +1,11 @@
 # EEG-Based Cognitive Confusion Detection
 
 ## Overview
-This project aims to predict **cognitive confusion** using EEG-derived spectral features.
+This project aims to predict cognitive confusion using EEG-derived spectral features.
 Cognitive confusion is closely related to attention, cognitive load, and learning difficulty,
 and is a key concept in cognitive neuroscience and educational psychology.
 
-The project was developed as a capstone for the **Machine Learning Zoomcamp** and focuses on:
+The project was developed as a capstone for the Machine Learning Zoomcamp and focuses on:
 - Interpretable EEG features
 - Classical machine learning models
 - Reproducible pipelines
@@ -19,7 +19,7 @@ processing during learning. EEG provides an objective physiological signal that 
 changes in neural oscillations associated with mental effort and attentional state.
 
 **Goal:**  
-Train a machine learning model to classify whether a subject is **confused or not confused**
+Train a machine learning model to classify whether a subject is confused or not confused
 based on EEG spectral features recorded during video-based learning.
 
 ---
