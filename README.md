@@ -43,63 +43,88 @@ based on EEG spectral features recorded during video-based learning.
 
 ---
 
-## Exploratory Data Analysis
-EDA includes:
-- Distribution analysis of EEG band power features
-- Comparison of EEG features between confused and non-confused states
-- Correlation analysis across frequency bands
-- Class balance inspection
 
+## Exploratory Data Analysis (EDA)
+
+EDA revealed several important characteristics:
+- Proprietary features were excluded due to unclear derivation and limited interpretability.
+- EEG power features exhibit strong right-skew and heavy tails
+- Log transformation significantly stabilizes distributions
+- Strong correlations exist between adjacent frequency bands
+- Class-conditional distributions show substantial overlap, indicating a challenging classification task
+Based on this, we used:
+- Log transformation of EEG bands
+- Preference for nonlinear tree-based models
 ---
-
-## Models
-The following models were trained and compared:
+### Modeling Approach
+Problem Formulation
+- Task: Binary classification
+- Metric: ROC-AUC (robust to class imbalance)
+- Validation: Stratified train/validation split + 5-fold cross-validation
+Models Evaluated
 - Logistic Regression (baseline)
 - Random Forest
-- Gradient Boosting
-- (Optional) Multi-layer Perceptron (neural network)
+- XGBoost (final model)
+### Results
+Model	ROC-AUC
+- Logistic Regression	0.56
+- Random Forest	0.59
+- XGBoost (single split)	0.61
+- XGBoost (5-fold CV)	0.60 ± 0.005
+XGBoost achieved the best performance with low variance across folds, indicating stable generalization.
+---
+### Feature Importance
+Feature importance analysis from the XGBoost model showed that higher-frequency EEG bands contributed most strongly:
+- Beta2
+- Gamma2
+- Gamma1
+- Beta1
+consistent with prior findings linking beta–gamma activity to cognitive load and attentional effort.
+---
+
+### Limitations
+This study has several important limitations:
+- Single-channel EEG limits spatial resolution
+- No subject-specific normalization
+- Labels may contain noise due to task-based annotation
+As such, results should be interpreted as feasibility evidence, not a production-ready cognitive state
+---
+
+### Deployment
+The final model is packaged as a FastAPI web service and deployed using Docker, enabling reproducible inference via a REST API.
+Run locally
+docker build -t eeg-confusion .
+docker run -p 8000:8000 eeg-confusion
+Example request
+{
+  "Delta": 123456,
+  "Theta": 23456,
+  "Alpha1": 34567,
+  "Alpha2": 45678,
+  "Beta1": 56789,
+  "Beta2": 67890,
+  "Gamma1": 78901,
+  "Gamma2": 89012
+}
 
 ---
 
-## Evaluation
-- Primary metric: ROC-AUC
-- Secondary metrics: Accuracy, F1-score
+### Project Structure
 
-ROC-AUC was selected due to potential class imbalance and its robustness for binary
-classification.
+├── data/
+├── notebooks/
+│   ├── 01_eda.ipynb
+│   └── 02_modeling.ipynb
+├── src/
+│   ├── train.py
+│   ├── predict.py
+│   └── serve.py
+├── model/
+│   └── xgb_model.bin
+├── Dockerfile
+├── requirements.txt
+└── README.md
 
----
-
-## Deployment
-The final model is deployed as a REST API using:
-- FastAPI for inference
-- Docker for containerization
-
-The API accepts EEG feature values and returns the probability of cognitive confusion.
-
----
-
-## Reproducibility
-- Fixed random seeds
-- Version-pinned dependencies
-- Training and inference separated into scripts
-
----
-
-## Project Structure
-cognitive-load-eeg-ml/
-—— data/
-   —— raw/
-   —— processed/
-—— notebooks/
-—— src/
-—— models/
-—— Dockerfile
-—— README.md
-—— requirements.txt
-
-
----
 
 ## Future Work
 - Subject-specific modeling
