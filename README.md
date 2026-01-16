@@ -111,9 +111,9 @@ Example request
 
 ### Project Structure
 
-├── data/
+|—— data/
 ├── notebooks/
-│   ├── 01_eda.ipynb
+│   ├── 01_eda_and_baseline.ipynb
 │   └── 02_modeling.ipynb
 ├── src/
 │   ├── train.py
