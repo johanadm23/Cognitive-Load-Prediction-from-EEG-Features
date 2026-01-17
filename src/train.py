@@ -6,7 +6,7 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_auc_score
 
-from preprocessing import preprocess_features, FEATURES
+from src.preprocessing import preprocess_features, FEATURES
 
 
 DATA_PATH = Path("data/EEG_data.csv")
