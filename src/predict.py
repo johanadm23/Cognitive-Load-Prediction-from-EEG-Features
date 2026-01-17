@@ -2,7 +2,8 @@ import joblib
 import pandas as pd
 from pathlib import Path
 
-from preprocessing import preprocess_features, FEATURES
+from src.preprocessing import preprocess_features, FEATURES
+
 
 
 MODEL_PATH = Path("model/xgb_model.bin")
