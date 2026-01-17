@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from predict import predict_confusion
-from preprocessing import FEATURES
+from src.predict import predict_confusion
+from src.preprocessing import FEATURES
+
 
 
 app = FastAPI(title="EEG Confusion Detection API")
