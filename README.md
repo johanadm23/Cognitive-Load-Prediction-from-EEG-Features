@@ -125,13 +125,22 @@ Example request
 |—— Dockerfile
 |—— requirements.txt
 |—— README.md
+---
+## Deployment
+
+The model is packaged as a Docker container and deployed as a FastAPI web service.
+
+A live version of the API was deployed on a render supporting Docker containers.  
+The service exposes a health check endpoint and interactive API documentation via Swagger UI.
+
+LIVE API: https://cognitive-load-prediction-from-eeg.onrender.com/docs#/default/predict_predict_post
 
 
 ## Future Work
 - Subject-specific modeling
 - Time-resolved confusion prediction
 - Multimodal integration (EEG + video or eye-tracking)
-- Deployment using Kubernetes or serverless inference
+
 
 ---
 
