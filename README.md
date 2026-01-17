@@ -87,9 +87,8 @@ This study has several important limitations:
 - Single-channel EEG limits spatial resolution
 - No subject-specific normalization
 - Labels may contain noise due to task-based annotation
-As such, results should be interpreted as feasibility evidence, not a production-ready cognitive state
+- As such, results should be interpreted as feasibility evidence, not a production-ready cognitive state
 ---
-
 ### Deployment
 The final model is packaged as a FastAPI web service and deployed using Docker, enabling reproducible inference via a REST API.
 Run locally
@@ -112,18 +111,20 @@ Example request
 ### Project Structure
 
 |—— data/
-├── notebooks/
-│   ├── 01_eda_and_baseline.ipynb
-│   └── 02_modeling.ipynb
-├── src/
-│   ├── train.py
-│   ├── predict.py
-│   └── serve.py
-├── model/
-│   └── xgb_model.bin
-├── Dockerfile
-├── requirements.txt
-└── README.md
+|—— |—— EEG_dta.csv
+|—— notebooks/
+│   |—— 01_eda_and_baseline.ipynb
+│   |—— 02_modeling.ipynb
+|—— src/
+|   |—— preprocessing.py
+│   |—— train.py
+│   |—— predict.py
+│   |——serve.py
+|—— model/
+│   |—— xgb_model.bin
+|—— Dockerfile
+|—— requirements.txt
+|—— README.md
 
 
 ## Future Work
