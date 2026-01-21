@@ -22,6 +22,8 @@ changes in neural oscillations associated with mental effort and attentional sta
 Train a machine learning model to classify whether a subject is confused or not confused
 based on EEG spectral features recorded during video-based learning.
 
+**Results:**
+Temporal aggregation of EEG spectral features substantially improved confusion classification under a random train/validation split (ROC-AUC ≈ 0.69) compared to static features (≈ 0.59), indicating strong within-subject temporal structure. Subject-wise normalization preserved this performance under random splits, suggesting that relative temporal dynamics—not absolute spectral baselines—are sufficient when subject overlap is present. However, when evaluated using subject-level cross-validation to prevent subject leakage, performance dropped to near chance for both static (≈ 0.52) and temporal features (≈ 0.50), with further degradation after subject normalization (≈ 0.49). These results indicate that confusion-related EEG signatures in this dataset are highly individualized and do not generalize across subjects when using simple spectral and temporal summary statistics. While temporal features capture meaningful within-subject dynamics, they fail to provide subject-independent markers of confusion, underscoring the importance of group-aware evaluation and highlighting the need for more expressive temporal models or subject-adaptive approaches for robust EEG-based confusion detection.
 ---
 
 ## Dataset
